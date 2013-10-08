@@ -4,7 +4,15 @@ Parrot::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
+  resources :users do
+    
+  end
 
+  resources :cohorts do
+    resources :projects, except: :new 
+  end
+
+  resources :projects, only: :new
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
