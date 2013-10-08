@@ -14,9 +14,10 @@ feature "admin adds a project to a cohort", %Q{
 # * they will be redirected to a page for the project they have just created
 
 let(:user){FactoryGirl.create(:user)}
+let(:project){FactoryGirl.create(:project)}
   
   scenario "enters valid information" do
-    prev_count = User.count
+    prev_count = Project.count
     sign_in_as(user)
     visit cohort_projects_path
     fill_in "Title", with: "Hangman"
@@ -25,11 +26,11 @@ let(:user){FactoryGirl.create(:user)}
     click_on "Submit"
     
     expect(page).to have_content("Hangman")
-    expect(User.count).to eql(prev_count +1)
+    expect(Project.count).to eql(prev_count +1)
   end
 
   scenario "enters invalid information" do
-    prev_count = User.count
+    prev_count = Project.count
     sign_in_as(user)
     visit cohort_projects_path
     fill_in "Title", with: "Hangman"
@@ -37,19 +38,19 @@ let(:user){FactoryGirl.create(:user)}
     click_on "Submit"
     
     expect(page).to_not have_content("Hangman")
-    expect(User.count).to eql(prev_count)
+    expect(Project.count).to eql(prev_count)
     expect(page).to have_content("Item can't be blank")
   end
 
   scenario "adds a project without being signed in" do
-    prev_count = User.count
+    prev_count = Project.count
     visit cohort_projects_path
     fill_in "Title", with: "Hangman"
     fill_in "Link", with: "www.fakewebsite.com"
     select "Fall", from: "Cohort"
     click_on "Submit"
     
-    expect(User.count).to eql(prev_count)
+    expect(Project.count).to eql(prev_count)
     expect(page).to have_content("You need to sign in or sign up before continuing")
   end
 
