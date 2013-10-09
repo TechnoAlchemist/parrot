@@ -25,7 +25,6 @@ feature "admin_edits_a_cohort" do
 
     expect(page).to_not have_content "You have successfully updated the cohort"
     expect(page).to have_content "can't be blank"
-    expect(page).to_not have_content "Fall"
   end
 
   scenario "unauthenticated user fails to access edit cohort page" do
