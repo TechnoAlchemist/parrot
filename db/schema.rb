@@ -11,9 +11,54 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 0) do
+=======
+ActiveRecord::Schema.define(version: 20131009024808) do
+>>>>>>> e5a21ad253181d9f85c155ee2f28f6bea431dcf2
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+<<<<<<< HEAD
+=======
+  create_table "cohorts", force: true do |t|
+    t.string   "term",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "group_memberships", force: true do |t|
+    t.integer  "user_id",    null: false
+    t.integer  "group_id",   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "groups", force: true do |t|
+    t.integer  "project_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "projects", force: true do |t|
+    t.string   "title",      null: false
+    t.string   "link",       null: false
+    t.integer  "cohort_id",  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", force: true do |t|
+    t.string   "first_name", null: false
+    t.string   "last_name",  null: false
+    t.string   "email",      null: false
+    t.string   "username",   null: false
+    t.string   "role",       null: false
+    t.integer  "cohort_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+>>>>>>> e5a21ad253181d9f85c155ee2f28f6bea431dcf2
 end
