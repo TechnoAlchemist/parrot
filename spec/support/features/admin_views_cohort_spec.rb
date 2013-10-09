@@ -24,29 +24,4 @@ feature "admin_views_a_cohort", %Q{
     expect(page).to have_content cohorts.first.term
     expect(page).to have_content cohorts.last.term
   end
-
-  scenario "admin successfully views a cohort" do
-    cohort = cohorts.first
-    sign_in_as(user)
-    visit cohorts_path
-    click_link cohorts.first.term
-
-    expect(page).to have_content cohort.term
-    expect(page).to have_content cohort.students
-    expect(page).to have_content cohort.groups
-    expect(page).to have_content "Edit"
-    expect(page).to have_content "Delete"
-  end
-
-  context "as an unauthenticated user" do
-    scenario "user sees cohort info, but not Edit and Delete links" do
-      cohort = cohorts.first
-      visit cohorts_path
-      click_link cohort.term
-
-      expect(page).to have_content cohort.term
-      expect(page).to_not have_content "Edit"
-      expect(page).to_not have_content "Delete"
-    end
-  end
 end

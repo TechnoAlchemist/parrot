@@ -11,17 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 0) do
-=======
 ActiveRecord::Schema.define(version: 20131009024808) do
->>>>>>> e5a21ad253181d9f85c155ee2f28f6bea431dcf2
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-<<<<<<< HEAD
-=======
   create_table "cohorts", force: true do |t|
     t.string   "term",       null: false
     t.datetime "created_at"
@@ -60,5 +54,4 @@ ActiveRecord::Schema.define(version: 20131009024808) do
     t.datetime "updated_at"
   end
 
->>>>>>> e5a21ad253181d9f85c155ee2f28f6bea431dcf2
 end
