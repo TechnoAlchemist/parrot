@@ -19,12 +19,13 @@ let(:project){FactoryGirl.create(:project)}
   scenario "enters valid information" do
     prev_count = Project.count
     sign_in_as(user)
-    visit cohort_projects_path
+    visit new_project_path
     fill_in "Title", with: "Hangman"
     fill_in "Link", with: "www.fakewebsite.com"
     select "Fall", from: "Cohort"
     click_on "Submit"
     
+    expect(page).to have_content("Project successfully created")
     expect(page).to have_content("Hangman")
     expect(Project.count).to eql(prev_count +1)
   end
@@ -32,9 +33,7 @@ let(:project){FactoryGirl.create(:project)}
   scenario "enters invalid information" do
     prev_count = Project.count
     sign_in_as(user)
-    visit cohort_projects_path
-    fill_in "Title", with: "Hangman"
-    fill_in "Link", with: "www.fakewebsite.com"
+    visit cohort_projects_path(cohort)
     click_on "Submit"
     
     expect(page).to_not have_content("Hangman")
@@ -44,14 +43,14 @@ let(:project){FactoryGirl.create(:project)}
 
   scenario "adds a project without being signed in" do
     prev_count = Project.count
-    visit cohort_projects_path
+    visit cohort_projects_path(cohort)
     fill_in "Title", with: "Hangman"
     fill_in "Link", with: "www.fakewebsite.com"
     select "Fall", from: "Cohort"
     click_on "Submit"
     
     expect(Project.count).to eql(prev_count)
-    expect(page).to have_content("You need to sign in or sign up before continuing")
+    expect(page).to have_content("You need to sign in before continuing")
   end
 
 end
