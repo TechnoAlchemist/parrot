@@ -9,4 +9,7 @@ describe Project do
 
   it { should have_valid(:link).when('apollo.launchacademy.com') }
   it { should_not have_valid(:link).when('', nil) }
+
+  it { should have_valid(:cohort).when(Cohort.new) }
+  it { should_not have_valid(:cohort).when(nil) }
 end
