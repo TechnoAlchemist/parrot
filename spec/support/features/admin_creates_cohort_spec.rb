@@ -37,12 +37,15 @@ feature "admin_creates_a_cohort", %Q{
     expect(page).to have_content "can't be blank"
     expect(Cohort.count).to eql(prev_count)
   end
-    scenario "unauthenticated user visits new cohort page and can not create cohort" do
+
+  context "as an unauthenticated user" do
+    scenario "when user visits new cohort page and can not create cohort" do
       visit new_cohort_path
 
       expect(page).to have_content "You must be signed in to view this page"
       expect(page).to_not have_content "Term"
     end
+  end
 end
 
 

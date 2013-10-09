@@ -1,6 +1,16 @@
 require 'spec_helper'
 
-feature "admin_edits_a_cohort" do
+feature "admin_edits_a_cohort", %Q{
+    As an authenticated admin user
+    I want to edit a cohort
+    so that when circumstances change the system can be updated
+  } do
+
+#   Acceptance Criteria
+# * Admin must be signed into the system
+# * Admin will be notified when the update is successful
+# * Admin will be given error message after failure
+
 
   let(:user) {FactoryGirl.create(:user)}
   let(:cohort) {FactoryGirl.create(:cohort)}
