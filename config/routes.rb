@@ -4,12 +4,14 @@ Parrot::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
+  root 'pages#index'
+
   resources :users do
-    
+
   end
 
   resources :cohorts do
-    resources :projects, except: :new 
+    resources :projects, except: :new
   end
 
   resources :projects, only: :new
@@ -47,7 +49,7 @@ Parrot::Application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-  
+
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'
