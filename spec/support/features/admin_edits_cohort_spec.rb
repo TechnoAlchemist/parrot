@@ -19,7 +19,7 @@ feature "admin_edits_a_cohort" do
 
   scenario "signed in user fails to edit cohort" do
     sign_in_as(user)
-    visit edit_cohort_path
+    visit edit_cohort_path(cohort)
     fill_in "Term", with: ""
     click_button "Update Cohort"
 
@@ -29,7 +29,7 @@ feature "admin_edits_a_cohort" do
   end
 
   scenario "unauthenticated user fails to access edit cohort page" do
-    visit edit_cohort_path
+    visit edit_cohort_path(cohort)
 
     expect(page).to have_content "You must be signed in to view this page"
     expect(page).to_not have_content "Update"
