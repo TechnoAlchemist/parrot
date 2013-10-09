@@ -19,6 +19,8 @@ feature "admin_views_a_cohort" do
     click_link cohorts.first.term
 
     expect(page).to have_content cohorts.first.term
+    expect(page).to have_content cohorts.first.students
+    expect(page).to have_content cohorts.first.groups
     expect(page).to have_content "Edit"
     expect(page).to have_content "Delete"
   end
