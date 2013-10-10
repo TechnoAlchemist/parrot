@@ -1,5 +1,4 @@
 class CohortsController < ApplicationController
-  before_filter :authenticate_user!
 
   def index
     @cohorts = Cohort.all
@@ -16,7 +15,8 @@ class CohortsController < ApplicationController
   def create
     @cohort = Cohort.new(cohort_params)
     if @cohort.save
-      redirect_to cohort_path(@cohort), notice: 'A new cohort has been created'
+      flash[:notice] = 'A new cohort has been created'
+      redirect_to cohort_path(@cohort)
     else
       render :new
     end
@@ -27,8 +27,10 @@ class CohortsController < ApplicationController
   end
 
   def update
+    @cohort = Cohort.find(params[:id])
     if @cohort.update(cohort_params)
-      redirect_to cohort_path(@cohort), notice 'You have successfully updated the cohort'
+      flash[:notice] = 'You have successfully updated the cohort'
+      redirect_to cohort_path(@cohort)
     else
       render :new
     end

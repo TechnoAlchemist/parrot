@@ -13,11 +13,12 @@ feature "admin_views_a_cohort", %Q{
 # * Admin may select a delete button to delete the cohort
 # * Admin will be asked to confirm edits or deletions before they are run
 
-  let(:user) {FactoryGirl.create(:user)}
-  let(:cohorts) {FactoryGirl.create_list(:cohort, 3)}
+
 
   scenario "admin successfully views cohorts" do
-    sign_in_as(user)
+    user = FactoryGirl.create(:user)
+    cohorts = FactoryGirl.create_list(:cohort, 3)
+    # sign_in_as(user)
     visit cohorts_path
 
     expect(page).to have_content "Cohorts"
