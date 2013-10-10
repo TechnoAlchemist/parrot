@@ -1,26 +1,20 @@
 <div>
-  <strong>Welcome to the <%= @cohort.term %> Cohort</strong> | <%=link_to "Edit Cohort", edit_cohort_path(@cohort) %> | <%=link_to "Delete Cohort", @cohort, method: :delete, data: { confirm: 'Are you sure?' } %>
+  <strong>Welcome to the <%= @cohort.term %> Cohort</strong> |
+  <%=link_to "Edit Cohort", edit_cohort_path(@cohort) %> |
+  <%=link_to "Delete Cohort", @cohort, method: :delete, data: { confirm: 'Are you sure?' } %>
 </div>
 <div>
-  <% if @cohort.users.count > 0 %>
-    <% @cohort.users.each do |user| %>
-      <%= user.first_name + " " + user.last_name %><br>
-      <%= user.username %><br>
-      <%= user.role %><br>
-    <% end %>
+  <% @cohort.users.each do |user| %>
+    <%= user.first_name + " " + user.last_name %><br>
+    <%= user.username %><br>
+    <%= user.role %><br>
   <% end %>
 </div>
 <div>
-  <% if @cohort.projects.count > 0 %>
-    <% @cohort.projects.each do |project| %>
-      <%= project.title %> | <%= project.link %><br>
-      <% if project.groups.count > 0 %>
-        <% project.groups.each_with_index do |group, index| %>
-          <% if group.group_memberships.count > 0 %>
-          Group number <%= index + 1 %> has <%= pluralize(group.group_memberships.count, "member") %>
-          <% end %>
-        <% end %>
-      <% end %>
+  <% @cohort.projects.each do |project| %>
+    <%= project.title %> | <%= project.link %><br>
+    <% project.groups.each_with_index do |group, index| %>
+      <%= "Group Number " + (index + 1).to_s + " has " + pluralize(group.group_memberships.count, "member") %>
     <% end %>
   <% end %>
 </div>

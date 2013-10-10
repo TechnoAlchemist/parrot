@@ -12,7 +12,6 @@ feature "admin_creates_a_cohort", %Q{
 # * If the admin attempts to create a cohort without entering required information,
 #   they will receive an error message
 
-
   let(:user) {FactoryGirl.create(:user)}
   let(:cohort) {FactoryGirl.build(:cohort)}
 
@@ -47,6 +46,3 @@ feature "admin_creates_a_cohort", %Q{
     end
   end
 end
-
-
-

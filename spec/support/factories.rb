@@ -7,30 +7,32 @@ FactoryGirl.define do
     role "admin"
     cohort
   end
-end
 
-FactoryGirl.define do
   factory :cohort do
     term "Fall"
   end
-end
 
-FactoryGirl.define do
   factory :group do
     project
   end
-end
 
-FactoryGirl.define do
   factory :group_membership do
     user
     group
   end
-end
-FactoryGirl.define do
+
   factory :project do
     sequence(:title) {|n| "project#{n}"}
     link "apollo.launchacademy.com"
     cohort
   end
 end
+
+
+
+
+
+
+
+
+

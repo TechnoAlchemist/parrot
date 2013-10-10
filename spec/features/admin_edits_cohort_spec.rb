@@ -11,7 +11,6 @@ feature "admin_edits_a_cohort", %Q{
 # * Admin will be notified when the update is successful
 # * Admin will be given error message after failure
 
-
   let(:user) {FactoryGirl.create(:user)}
   let(:cohort) {FactoryGirl.create(:cohort)}
 
@@ -47,3 +46,5 @@ feature "admin_edits_a_cohort", %Q{
     expect(page).to_not have_content "Update"
   end
 end
+
+
