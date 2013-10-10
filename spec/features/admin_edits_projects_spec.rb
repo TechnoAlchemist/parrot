@@ -18,8 +18,6 @@ feature "admin edits a project", %Q{
     scenario "admin can edit a project" do
     sign_in_as(user)
     visit edit_cohort_project_path(cohort, project)
-   
-  
     fill_in "Title", with: "BlackJack"
     fill_in "Link", with: "www.fakewebsite.com"
     select "Fall", from: "Cohort"
@@ -39,5 +37,19 @@ feature "admin edits a project", %Q{
 
     expect(page).to have_content("Item can't be blank")
     expect(page).to_not have_content(project.title)
+  end
+
+  scenario "student tries to edit a project" do
+    student = FactoryGirl.create(:user, role: 'student')
+    sign_in_as(student)
+    visit edit_cohort_project_path(cohort, project)
+    fill_in "Title", with: "BlackJack"
+    fill_in "Link", with: "www.fakewebsite.com"
+    select "Fall", from: "Cohort"
+    click_on "Submit"
+
+    expect(page).to have_content("You do not have permission to edit projects")
+    expect(page).to_not have_content(project.title)
+
   end
 end

@@ -27,7 +27,8 @@ feature "admin edits a project", %Q{
   end
 
   scenario "unauthenticated user tries to delete a project" do
-    sign_in_as(user)
+    student = FactoryGirl.create(:user, role: 'student')
+    sign_in_as(student)
     visit cohort_project_path
     click_on project.title
 

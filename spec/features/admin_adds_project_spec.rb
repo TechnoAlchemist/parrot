@@ -53,4 +53,18 @@ let(:project){FactoryGirl.create(:project)}
     expect(page).to have_content("You need to sign in before continuing")
   end
 
+  scenario "studen tries to add project"
+    student = FactoryGirl.create(:user, role: 'student')
+    prev_count = Project.count
+    sign_in_as(student)
+    visit cohort_project_path(cohort)
+    fill_in "Title", with: "Hangman"
+    fill_in "Link", with: "www.fakewebsite.com"
+    select "Fall", from: "Cohort"
+    click_on "Submit"
+
+    expect(Project.count).to eql(prev_count)
+    expect(page).to have_content("You do not have permission to add projects")
+
+
 end

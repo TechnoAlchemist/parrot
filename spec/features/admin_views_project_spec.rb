@@ -12,8 +12,6 @@ feature "admin views a project", %Q{
 # * the associated cohort, and the pairing assignments (if any)
 # * Admin will be asked to confirm edits or deletions before they are run
 
-## Create a feature file for viewing a list of projects
-#### Create multiple projects via let
 
   let(:project){FactoryGirl.create(:project)}
   let(:user){FactoryGirl.create(:user)}
@@ -29,7 +27,4 @@ feature "admin views a project", %Q{
     expect(page).to have_content('Delete')
     expect(page).to have_content('Edit')
   end
-
-
-
 end
