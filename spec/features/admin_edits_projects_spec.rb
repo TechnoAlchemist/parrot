@@ -16,7 +16,7 @@ feature "admin edits a project", %Q{
   let!(:cohort){FactoryGirl.create(:cohort)}
 
     scenario "admin can edit a project" do
-    sign_in_as(user)
+    # sign_in_as(user)
     visit edit_cohort_project_path(cohort, project)
     fill_in "Title", with: "BlackJack"
     fill_in "Link", with: "www.fakewebsite.com"
@@ -28,7 +28,7 @@ feature "admin edits a project", %Q{
   end
 
   scenario "admin enters invalid information" do
-    sign_in_as(user)
+    # sign_in_as(user)
     visit edit_cohort_project_path(cohort, project)
     fill_in "Title", with: ""
     fill_in "Link", with: ""
@@ -41,7 +41,7 @@ feature "admin edits a project", %Q{
 
   scenario "student tries to edit a project" do
     student = FactoryGirl.create(:user, role: 'student')
-    sign_in_as(student)
+    # sign_in_as(student)
     visit edit_cohort_project_path(cohort, project)
     fill_in "Title", with: "BlackJack"
     fill_in "Link", with: "www.fakewebsite.com"

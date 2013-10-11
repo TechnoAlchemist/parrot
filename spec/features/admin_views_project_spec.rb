@@ -13,14 +13,18 @@ feature "admin views a project", %Q{
 # * Admin will be asked to confirm edits or deletions before they are run
 
 
-  let(:project){FactoryGirl.create(:project)}
-  let(:user){FactoryGirl.create(:user)}
-  let(:cohort){FactoryGirl.create(:cohort)}
+  # let(:project){FactoryGirl.create(:project)}
+  # let(:user){FactoryGirl.create(:user)}
+  let!(:cohort){FactoryGirl.create(:cohort)}
 
 
   scenario "views a project" do
-    sign_in_as(user)
+    # user = FactoryGirl.create(:user, cohort: cohort)
+    # sign_in_as(user)
+    project = FactoryGirl.create(:project, cohort: cohort)
+
     visit cohort_project_path(cohort, project)
+    # save_and_open_page
     
     expect(page).to have_content(project.title)
     expect(page).to have_content(project.link)

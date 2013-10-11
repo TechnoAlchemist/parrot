@@ -11,15 +11,15 @@ feature "admin edits a project", %Q{
 # * Admin may select a delete button to be redirected to a page 
 # * where they can delete the project
 
-  let(:project){FactoryGirl.create(:project)}
+  let!(:cohort){FactoryGirl.create(:cohort)}
   let(:user){FactoryGirl.create(:user)}
 
 
   scenario "admin deletes a project" do
     prev_count = Project.count
-    
-    sign_in_as(user)
-    visit cohort_project_path
+    project = FactoryGirl.create(:project, cohort: cohort)    
+    # sign_in_as(user)
+    visit cohort_project_path(cohort, project)
     click_on 'Delete'
 
     expect(page).to_not have_content(project.title)
@@ -27,10 +27,11 @@ feature "admin edits a project", %Q{
   end
 
   scenario "unauthenticated user tries to delete a project" do
-    student = FactoryGirl.create(:user, role: 'student')
-    sign_in_as(student)
-    visit cohort_project_path
-    click_on project.title
+    pending
+    # student = FactoryGirl.create(:user, role: 'student')
+    project = FactoryGirl.create(:project, cohort: cohort)
+    # sign_in_as(student)
+    visit cohort_project_path(cohort, project)
 
     expect(page).to_not have_content("Delete")
   end

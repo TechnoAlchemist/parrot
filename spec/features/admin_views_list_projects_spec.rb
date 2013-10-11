@@ -10,12 +10,15 @@ feature "admin views a project", %Q{
 # * Admin must first be signed in
 # * Admin can see a list of project titles
 
-  let(:projects){FactoryGirl.create_list(:project, 3)}
-  let(:user){FactoryGirl.create(:user)}
-  let(:cohort){FactoryGirl.create(:cohort)}
+  let!(:cohort){FactoryGirl.create(:cohort)}
+  # let!(:projects){FactoryGirl.create_list(:project, 3)}
+  # let!(:user){FactoryGirl.create(:user)}
+  
 
   scenario "views a list of projects" do
-    sign_in_as(user)
+    user = FactoryGirl.create(:user, cohort: cohort)
+    projects = FactoryGirl.create_list(:project, 3, cohort: cohort)
+    # sign_in_as(user)
     visit cohort_projects_path(cohort)
 
     expect(page).to have_content('Projects')
