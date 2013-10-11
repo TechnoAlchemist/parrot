@@ -24,6 +24,19 @@ class ProjectsController < ApplicationController
 
   def edit
     @project = Project.find(params[:id])
+    @cohort = Cohort.find(params[:cohort_id])
+  end
+
+  def update
+    @project = Project.find(params[:id])
+    @cohort = Cohort.find(params[:cohort_id])
+
+    if @project.update(project_params)
+      flash[:notice] = 'Project successfully edited'
+      redirect_to cohort_project_path(@cohort, @project)
+    else
+      render :edit
+    end
   end
 
   def show
