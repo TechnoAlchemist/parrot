@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131009024808) do
+ActiveRecord::Schema.define(version: 20131009182918) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,8 @@ ActiveRecord::Schema.define(version: 20131009024808) do
     t.integer  "cohort_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "provider"
+    t.string   "uid"
   end
 
 end
