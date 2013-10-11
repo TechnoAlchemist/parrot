@@ -30,11 +30,15 @@ class ProjectsController < ApplicationController
     # binding.pry
      @project = Project.find(params[:id])
      @cohort = Cohort.find(params[:cohort_id])
+  end
 
-     # @cohort = Cohort.find(params [:cohort_id])
-     # @project = Project.new
-     # @projects = @cohort.projects
+  def destroy
+     @project = Project.find(params[:id])
+     @cohort = Cohort.find(params[:cohort_id])
 
+    if @project.destroy
+      redirect_to cohort_projects_path(@cohort)
+    end
   end
 
   def project_params

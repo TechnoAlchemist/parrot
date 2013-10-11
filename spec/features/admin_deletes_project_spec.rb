@@ -16,8 +16,8 @@ feature "admin edits a project", %Q{
 
 
   scenario "admin deletes a project" do
-    prev_count = Project.count
     project = FactoryGirl.create(:project, cohort: cohort)    
+    prev_count = Project.count
     # sign_in_as(user)
     visit cohort_project_path(cohort, project)
     click_on 'Delete'
