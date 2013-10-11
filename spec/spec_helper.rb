@@ -40,17 +40,5 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 
-  # config.include IntegrationSpecHelper, :type => :request
+  config.include TestHelpers
 end
-
-# Capybara.default_host = 'http://example.org'
-
-OmniAuth.config.test_mode = true
-OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new({
-  :provider => 'github',
-  :uid => '12345',
-  :nickname => 'johnnyp',
-  :name => 'Johnny Parrot',
-  :email => 'johnny@saltines.com'
-  })
-

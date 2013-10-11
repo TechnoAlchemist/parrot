@@ -4,12 +4,11 @@ Parrot::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
-  resources :users do
+  root 'pages#index'
 
-  end
+  resources :users
 
-  resources :sessions do
-  end
+  resources :sessions
 
   get 'auth/github/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/users/new')
