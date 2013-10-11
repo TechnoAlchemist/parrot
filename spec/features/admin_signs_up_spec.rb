@@ -15,18 +15,59 @@ feature 'admin signs up', %Q{
   #   must complete all sign up criteria
 
   scenario 'admin signs up with valid login credentials' do
-    user = FactoryGirl.create(:user)
+    set_omniauth
+    visit users_path
+    click_link 'Sign in with GitHub'
+
+    expect(current_path).to eql(users_path)
+    expect(page).to have_content('Signed in as')
+  end
+
+  scenario 'admin signs up with invalid login credentials' do
+    set_invalid_omniauth
 
     visit users_path
     click_link 'Sign in with GitHub'
-    visit "/auth/github"
 
-    expect(path).to eql(users_path)
-    expect(page).to have_content('You have signed up successfully')
+    expect(current_path).to eql(new_user_path)
+    expect(page).to have_content('')
   end
 
-  pending 'admin signs up with invalid login credentials' do
+def set_omniauth(opts = {})
+  default = {:provider => :github,
+             :uuid     => '123545',
+             :github => {
+                :nickname => 'annek',
+                :email => "foobar@example.com",
+                :name => 'johhny parrot'
+              }
+            }
 
-  end
+  credentials = default.merge(opts)
+  provider = credentials[:provider]
+  user_hash = credentials[provider]
+
+  OmniAuth.config.test_mode = true
+
+  OmniAuth.config.mock_auth[provider] = {
+    'provider' => 'github',
+    'uid' => credentials[:uuid],
+    "info" => {
+      "email" => user_hash[:email],
+      "nickname" => user_hash[:nickname],
+      "name" => user_hash[:name]
+      }
+    }
+end
+
+def set_invalid_omniauth(opts = {})
+  credentials = { :provider => :github,
+                  :invalid  => :invalid_crendentials
+                 }.merge(opts)
+
+  OmniAuth.config.test_mode = true
+  OmniAuth.config.mock_auth[credentials[:provider]] = credentials[:invalid]
+
+end
 
 end

@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   end
 
   def new
-    @user = User.from_omniauth(env["omniauth.auth"])
+    @user = User.new
   end
 
   def create

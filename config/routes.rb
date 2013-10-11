@@ -11,9 +11,9 @@ Parrot::Application.routes.draw do
   resources :sessions do
   end
 
-  match 'auth/github/callback', to: 'sessions#create', via: [:get, :post]
-  match 'auth/failure', to: redirect('/users/new'), via: [:new]
-  match 'signout', to: 'sessions#destroy', as: 'signout', via: [:delete]
+  get 'auth/github/callback', to: 'sessions#create'
+  get 'auth/failure', to: redirect('/users/new')
+  get 'signout', to: 'sessions#destroy', as: 'signout'
 
   resources :cohorts do
     resources :projects, except: :new

@@ -1,9 +1,4 @@
 class SessionsController < ApplicationController
-  before do
-    request.env["devise.mapping"] = Devise.mappings[:user]
-    request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:github]
-  end
-
 
   def create
     user = User.from_omniauth(env["omniauth.auth"])
