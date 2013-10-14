@@ -3,4 +3,5 @@ rvm:
   - 2.0.0
   - 1.9.3
 before_script:
-  - psql -c 'create database myapp_test;' -U postgres
+  - cp config/database.travis.yml config/database.yml
+  - psql -c 'create database parrot_test;' -U postgres
