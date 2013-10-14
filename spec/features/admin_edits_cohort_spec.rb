@@ -39,11 +39,22 @@ feature "admin_edits_a_cohort", %Q{
     expect(page).to have_content "can't be blank"
   end
 
-  scenario "unauthenticated user fails to access edit cohort page" do
-    pending visit edit_cohort_path(cohort)
+  context "As a student user"
+    scenario "User fails to access edit cohort page" do
+      pending visit edit_cohort_path(cohort)
 
-    expect(page).to have_content "You must be signed in to view this page"
-    expect(page).to_not have_content "Update"
+      expect(page).to have_content "You are not authorized to view this page"
+      expect(page).to_not have_content "Update"
+    end
+  end
+
+  context "As an unauthenticated user"
+    scenario "User fails to access edit cohort page" do
+      pending visit edit_cohort_path(cohort)
+
+      expect(page).to have_content "You must be signed in to view this page"
+      expect(page).to_not have_content "Update"
+    end
   end
 end
 

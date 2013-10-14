@@ -32,6 +32,17 @@ feature "User views cohort show page", %Q{
       expect(page).to have_content "Delete"
     end
 
+  context "as a student user" do
+    scenario "user sees cohort info, but not Edit and Delete links" do
+      pending visit cohorts_path
+      click_link cohort.term
+
+      expect(page).to have_content cohort.term
+      expect(page).to_not have_content "Edit"
+      expect(page).to_not have_content "Delete"
+    end
+  end
+
   context "as an unauthenticated user" do
     scenario "user sees cohort info, but not Edit and Delete links" do
       pending visit cohorts_path

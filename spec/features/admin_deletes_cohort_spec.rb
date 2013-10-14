@@ -25,7 +25,16 @@ feature "admin_deletes_a_cohort", %Q{
     expect(page).to_not have_content cohort.term
   end
 
-   context "as an unauthenticated user" do
+  context "as a student user" do
+    scenario "user can not delete cohort" do
+      pending visit cohorts_path
+      click_link cohort.term
+
+      expect(page).to_not have_content "Delete"
+    end
+  end
+
+  context "as an unauthenticated user" do
     scenario "user can not delete cohort" do
       pending visit cohorts_path
       click_link cohort.term

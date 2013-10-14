@@ -37,6 +37,16 @@ feature "admin_creates_a_cohort", %Q{
     expect(Cohort.count).to eql(prev_count)
   end
 
+  context "as a student user" do
+    scenario "when student visits new cohort page and can not create cohort" do
+      user = FactoryGirl.create(:user, role: "student")
+      pending visit new_cohort_path
+
+      expect(page).to have_content "You are not authroized to view this page"
+      expect(page).to_not have_content "Term"
+    end
+  end
+
   context "as an unauthenticated user" do
     scenario "when user visits new cohort page and can not create cohort" do
       pending visit new_cohort_path
