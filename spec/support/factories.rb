@@ -27,12 +27,3 @@ FactoryGirl.define do
     cohort
   end
 end
-
-
-
-
-
-
-
-
-
