@@ -43,6 +43,7 @@ group :development, :test do
   gem 'launchy'
   gem 'pry-rails'
   gem 'database_cleaner'
+  gem 'coveralls', require: false
 end
 
 group :test do
