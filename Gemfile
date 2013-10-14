@@ -45,6 +45,10 @@ group :development, :test do
   gem 'database_cleaner'
 end
 
+group :test do
+  gem 'rake' # required for Travis CI
+end
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
