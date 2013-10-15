@@ -1,5 +1,7 @@
 FactoryGirl.define do
   factory :user do
+    provider 'github'
+    uid '123545'
     first_name "Mark"
     last_name "Smith"
     sequence(:email) {|n| "person#{n}@parrot.com"}
