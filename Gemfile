@@ -46,8 +46,6 @@ group :development, :test do
   gem 'pry-rails'
   gem 'database_cleaner'
   gem 'dotenv-rails'
-  gem 'vcr'
-  gem 'fakeweb'
 end
 
 # Use ActiveModel has_secure_password
