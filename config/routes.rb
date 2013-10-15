@@ -15,10 +15,10 @@ Parrot::Application.routes.draw do
   get 'signout', to: 'sessions#destroy', as: 'signout'
 
   resources :cohorts do
-    resources :projects, except: :new
+    resources :projects
   end
 
-  resources :projects, only: :new
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

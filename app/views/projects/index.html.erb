@@ -1,0 +1,8 @@
+<div>
+  <h1>Projects:</h1>
+  </div>
+  <% @projects.each do |project| %>
+    <%= link_to project.title, cohort_project_path(@cohort, project) %><br>
+  <% end %>
+
+<%= link_to "Create New Project", new_cohort_project_path(@cohort) %>

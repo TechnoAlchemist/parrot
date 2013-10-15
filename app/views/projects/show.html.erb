@@ -1,0 +1,12 @@
+<div>
+    <strong><%= @project.title %></strong>
+</div>
+
+<div>
+    <strong><%= @project.link %></strong>
+</div>
+
+<div>
+  <%= link_to "Edit", edit_cohort_project_path(@cohort, @project) %>
+  <%= link_to "Delete", cohort_project_path(@cohort, @project), method: :delete, data: {confirm: "Are you sure?"} %>
+</div>

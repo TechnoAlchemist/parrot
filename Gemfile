@@ -46,6 +46,11 @@ group :development, :test do
   gem 'pry-rails'
   gem 'database_cleaner'
   gem 'dotenv-rails'
+  gem 'coveralls', require: false
+end
+
+group :test do
+  gem 'rake' # required for Travis CI
 end
 
 # Use ActiveModel has_secure_password
