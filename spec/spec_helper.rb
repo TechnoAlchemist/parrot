@@ -41,4 +41,5 @@ RSpec.configure do |config|
   config.order = "random"
 
   config.include TestHelpers
+  config.include OmniAuthHelpers
 end
