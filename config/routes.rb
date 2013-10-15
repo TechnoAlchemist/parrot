@@ -6,9 +6,13 @@ Parrot::Application.routes.draw do
   # root 'welcome#index'
   root 'pages#index'
 
-  resources :users do
+  resources :users
 
-  end
+  resources :sessions
+
+  get 'auth/github/callback', to: 'sessions#create'
+  get 'auth/failure', to: redirect('/users/new')
+  get 'signout', to: 'sessions#destroy', as: 'signout'
 
   resources :cohorts do
     resources :projects

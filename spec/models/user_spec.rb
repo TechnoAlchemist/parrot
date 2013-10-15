@@ -19,4 +19,10 @@ describe User do
 
   it { should have_valid(:role).when('student', 'admin') }
   it { should_not have_valid(:role).when('', nil, 'player') }
+
+  it { should have_valid(:provider).when('github') }
+  it { should_not have_valid(:provider).when(nil, '') }
+
+  it { should have_valid(:uid).when('123545') }
+  it { should_not have_valid(:uid).when(nil, '') }
 end
