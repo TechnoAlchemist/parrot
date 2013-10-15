@@ -7,10 +7,15 @@ class ProjectsController < ApplicationController
    def new
     @project = Project.new
     @cohort = Cohort.find(params[:cohort_id])
+    if signed_in?
+      @project = Project.new
+      @cohort = Cohort.find(params[:cohort_id])
+    else
+      flash[:notice] = "You need to sign in before continuing"
+    end
   end
 
   def create
-    # binding.pry
     @project = Project.new(project_params)
     @cohort = Cohort.find(params[:cohort_id])
     @project.cohort = @cohort
