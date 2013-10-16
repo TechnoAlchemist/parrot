@@ -12,13 +12,14 @@ feature "admin edits a project", %Q{
 # * where they can delete the project
 
   let!(:cohort){FactoryGirl.create(:cohort)}
-  let(:user){FactoryGirl.create(:user)}
+  
 
 
   scenario "admin deletes a project" do
     project = FactoryGirl.create(:project, cohort: cohort)    
     prev_count = Project.count
-    # sign_in_as(user)
+    set_omniauth(role: "admin")
+    sign_in
     visit cohort_project_path(cohort, project)
     click_on 'Delete'
 
@@ -27,10 +28,7 @@ feature "admin edits a project", %Q{
   end
 
   scenario "unauthenticated user tries to delete a project" do
-    pending
-    # student = FactoryGirl.create(:user, role: 'student')
     project = FactoryGirl.create(:project, cohort: cohort)
-    # sign_in_as(student)
     visit cohort_project_path(cohort, project)
 
     expect(page).to_not have_content("Delete")

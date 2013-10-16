@@ -16,7 +16,8 @@ feature "admin_deletes_a_cohort", %Q{
 
   scenario "admin successfully deletes cohort" do
     prev_count = Cohort.count
-    # sign_in_as(user)
+    set_omniauth
+    sign_in
     visit cohorts_path
     click_link cohort.term
     click_link "Delete"
@@ -27,7 +28,7 @@ feature "admin_deletes_a_cohort", %Q{
 
    context "as an unauthenticated user" do
     scenario "user can not delete cohort" do
-      pending visit cohorts_path
+      visit cohorts_path
       click_link cohort.term
 
       expect(page).to_not have_content "Delete"

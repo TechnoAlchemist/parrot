@@ -2,15 +2,28 @@ class ProjectsController < ApplicationController
   def index
     @projects = Project.where(cohort_id: params[:cohort_id])
     @cohort = Cohort.find(params[:cohort_id])
+    if signed_in? 
+      @projects = Project.where(cohort_id: params[:cohort_id])
+      @cohort = Cohort.find(params[:cohort_id])
+    else 
+      flash[:notice] = "You must be signed in to continue"
+      redirect_to :root
+    end
   end
 
    def new
     @project = Project.new
     @cohort = Cohort.find(params[:cohort_id])
+    if signed_in? && current_user.role == "admin"
+      @project = Project.new
+      @cohort = Cohort.find(params[:cohort_id])
+    else
+      flash[:notice] = "You do not have permission to add projects"
+      redirect_to cohort_projects_path
+    end
   end
 
   def create
-    # binding.pry
     @project = Project.new(project_params)
     @cohort = Cohort.find(params[:cohort_id])
     @project.cohort = @cohort
@@ -25,7 +38,14 @@ class ProjectsController < ApplicationController
   def edit
     @project = Project.find(params[:id])
     @cohort = Cohort.find(params[:cohort_id])
-  end
+    if signed_in? && current_user.role == "admin"
+      @project = Project.find(params[:id])
+      @cohort = Cohort.find(params[:cohort_id])
+    else
+      flash[:notice] = "You do not have permission to edit projects"
+      redirect_to cohort_projects_path
+    end
+   end
 
   def update
     @project = Project.find(params[:id])
@@ -40,17 +60,15 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    # binding.pry
      @project = Project.find(params[:id])
      @cohort = Cohort.find(params[:cohort_id])
   end
 
   def destroy
-     @project = Project.find(params[:id])
-     @cohort = Cohort.find(params[:cohort_id])
-
+    @project = Project.find(params[:id])
+    @cohort = Cohort.find(params[:cohort_id])
     if @project.destroy
-      redirect_to cohort_projects_path(@cohort)
+      redirect_to :cohort_projects
     end
   end
 

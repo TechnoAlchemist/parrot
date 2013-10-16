@@ -1,7 +1,9 @@
 <div>
   <strong>Welcome to the <%= @cohort.term %> Cohort</strong> |
-  <%=link_to "Edit Cohort", edit_cohort_path(@cohort) %> |
-  <%=link_to "Delete Cohort", @cohort, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% if signed_in? %> 
+      <%=link_to "Edit Cohort", edit_cohort_path(@cohort) %> |
+      <%=link_to "Delete Cohort", @cohort, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %>
 </div>
 <div>
   <% @cohort.users.each do |user| %>

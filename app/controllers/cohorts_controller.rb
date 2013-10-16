@@ -6,6 +6,11 @@ class CohortsController < ApplicationController
 
   def new
     @cohort = Cohort.new
+    if signed_in?
+      @cohort = Cohort.new
+    else
+      flash[:notice] = "You must be signed in to view this page"
+    end
   end
 
   def show

@@ -20,7 +20,8 @@ feature "User views cohort show page", %Q{
 
   scenario "admin successfully views a cohort" do
 
-      # sign_in_as(user)
+      set_omniauth(role: "admin")
+      sign_in
       visit cohorts_path
       click_link cohort.term
 

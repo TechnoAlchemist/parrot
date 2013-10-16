@@ -11,19 +11,24 @@ feature "admin views a project", %Q{
 # * Admin can see a list of project titles
 
   let!(:cohort){FactoryGirl.create(:cohort)}
-  # let!(:projects){FactoryGirl.create_list(:project, 3)}
-  # let!(:user){FactoryGirl.create(:user)}
+
   
 
   scenario "views a list of projects" do
-    user = FactoryGirl.create(:user, cohort: cohort)
     projects = FactoryGirl.create_list(:project, 3, cohort: cohort)
-    # sign_in_as(user)
+    set_omniauth(role: "admin")
+    sign_in
     visit cohort_projects_path(cohort)
 
     expect(page).to have_content('Projects')
     expect(page).to have_content(projects.first.title)
     expect(page).to have_content(projects.last.title)
+  end
 
+  scenario "unathenticated user tries to view list of projects" do
+    projects = FactoryGirl.create_list(:project, 3, cohort: cohort)
+    visit cohort_projects_path(cohort)
+    expect(page).to_not have_content('Projects')
+    expect(page).to have_content("You must be signed in to continue")
   end
 end

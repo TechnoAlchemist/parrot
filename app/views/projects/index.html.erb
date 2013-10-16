@@ -1,8 +1,11 @@
 <div>
   <h1>Projects:</h1>
   </div>
+
   <% @projects.each do |project| %>
     <%= link_to project.title, cohort_project_path(@cohort, project) %><br>
   <% end %>
 
+<% if signed_in? && current_user.role == "admin" %>
 <%= link_to "Create New Project", new_cohort_project_path(@cohort) %>
+<% end %>

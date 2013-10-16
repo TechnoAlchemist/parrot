@@ -7,6 +7,8 @@
 </div>
 
 <div>
-  <%= link_to "Edit", edit_cohort_project_path(@cohort, @project) %>
-  <%= link_to "Delete", cohort_project_path(@cohort, @project), method: :delete, data: {confirm: "Are you sure?"} %>
+  <% if signed_in? && current_user.role == "admin" %>
+    <%= link_to "Edit", edit_cohort_project_path(@cohort, @project) %>
+    <%= link_to "Delete", cohort_project_path(@cohort, @project), method: :delete, data: {confirm: "Are you sure?"} %>
+  <% end %>
 </div>
