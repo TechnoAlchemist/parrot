@@ -16,7 +16,8 @@ feature "admin edits a project", %Q{
   let!(:cohort){FactoryGirl.create(:cohort)}
 
     scenario "admin can edit a project" do
-    # sign_in_as(user)
+    set_omniauth(role: "admin")
+    sign_in
     project = FactoryGirl.create(:project, cohort: cohort)
     visit edit_cohort_project_path(cohort, project)
     fill_in "Title", with: "BlackJack"
@@ -29,7 +30,8 @@ feature "admin edits a project", %Q{
   end
 
   scenario "admin enters invalid information" do
-    # sign_in_as(user)
+    set_omniauth(role: "admin")
+    sign_in
     project = FactoryGirl.create(:project, cohort: cohort)
     visit edit_cohort_project_path(cohort, project)
     fill_in "Title", with: ""
@@ -40,18 +42,20 @@ feature "admin edits a project", %Q{
     expect(page).to_not have_content(project.title)
   end
 
-  scenario "student tries to edit a project" do
-    pending
-    student = FactoryGirl.create(:user, role: 'student')
-    # sign_in_as(student)
-    visit edit_cohort_project_path(cohort, project)
-    fill_in "Title", with: "BlackJack"
-    fill_in "Link", with: "www.fakewebsite.com"
-    select "Fall", from: "Cohort"
-    click_on "Edit Project"
+  scenario "unauthenticated user tries to edit a project" do
+    project = FactoryGirl.create(:project, cohort: cohort)
+    visit edit_cohort_project_path(cohort, project) 
 
     expect(page).to have_content("You do not have permission to edit projects")
-    expect(page).to_not have_content(project.title)
-
   end
+
+  scenario "student tries to edit a project" do
+    set_omniauth
+    sign_in
+    project = FactoryGirl.create(:project, cohort: cohort)
+    visit cohort_project_path(cohort, project)
+
+    expect(page).to_not have_content("Edit")
+  end
+
 end

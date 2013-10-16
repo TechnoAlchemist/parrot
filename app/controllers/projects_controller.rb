@@ -30,7 +30,15 @@ class ProjectsController < ApplicationController
   def edit
     @project = Project.find(params[:id])
     @cohort = Cohort.find(params[:cohort_id])
-  end
+    # binding.pry
+    if current_user && current_user.role == "admin"
+      @project = Project.find(params[:id])
+      @cohort = Cohort.find(params[:cohort_id])
+    else
+      flash[:notice] = "You do not have permission to edit projects"
+      redirect_to cohort_projects_path
+    end
+   end
 
   def update
     @project = Project.find(params[:id])

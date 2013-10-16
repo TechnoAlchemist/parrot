@@ -23,7 +23,8 @@ module OmniAuthHelpers
         "email" => user_hash[:email],
         "nickname" => user_hash[:nickname],
         "name" => user_hash[:name]
-        }
+        },
+      'role' => credentials[:role]
       }
   end
 

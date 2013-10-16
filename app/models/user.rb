@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
       user.provider = auth["provider"]
       user.uid = auth["uid"]
       user.username = auth['info']['nickname']
-      user.role = "student"
+      user.role = auth["role"] || "student"
       user.email = auth['info']['email']
       name = auth['info'].fetch(:name) { "Johnny Parrot" }
       user.first_name = name.split(" ")[0]
