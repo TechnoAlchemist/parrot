@@ -6,8 +6,7 @@ FactoryGirl.define do
     last_name "Smith"
     sequence(:email) {|n| "person#{n}@parrot.com"}
     sequence(:username) {|n| "person#{n}"}
-    role "admin"
-    cohort
+    role "student"
   end
 
   factory :cohort do

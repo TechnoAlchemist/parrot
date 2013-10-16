@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  serialize :pairs
+
   belongs_to :cohort, inverse_of: :users
   has_many :group_memberships, inverse_of: :user, dependent: :destroy
   has_many :groups, through: :group_memberships
@@ -9,11 +11,10 @@ class User < ActiveRecord::Base
   validates_presence_of :role
   validates_presence_of :provider
   validates_presence_of :uid
+  validates_presence_of :email
 
   validates_inclusion_of :role, in: %w(student admin)
 
-  # Email validation will change with devise
-  validates_presence_of :email
   validates_format_of :email, with: /\A[\w.-]+@[\w.-]+\.[\w]{2,4}\z/
 
   def self.from_omniauth(auth)
@@ -27,7 +28,7 @@ class User < ActiveRecord::Base
       user.provider = auth["provider"]
       user.uid = auth["uid"]
       user.username = auth['info']['nickname']
-      user.role = "student"
+      user.role = auth['role'] || 'student'
       user.email = auth['info']['email']
       name = auth['info'].fetch(:name) { "Johnny Parrot" }
       user.first_name = name.split(" ")[0]

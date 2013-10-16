@@ -6,6 +6,11 @@
     <strong><%= @project.link %></strong>
 </div>
 
+<%= form_tag generate_cohort_project_path(@cohort, @project) do %>
+  <%= text_field_tag 'Group Size' %>
+  <%= submit_tag 'Generate Pairs' %>
+<% end -%>
+
 <div>
   <%= link_to "Edit", edit_cohort_project_path(@cohort, @project) %>
   <%= link_to "Delete", cohort_project_path(@cohort, @project), method: :delete, data: {confirm: "Are you sure?"} %>
