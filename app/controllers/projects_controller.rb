@@ -51,11 +51,10 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-     @project = Project.find(params[:id])
-     @cohort = Cohort.find(params[:cohort_id])
-
+    @project = Project.find(params[:id])
+    @cohort = Cohort.find(params[:cohort_id])
     if @project.destroy
-      redirect_to cohort_projects_path(@cohort)
+      redirect_to :cohort_projects
     end
   end
 
