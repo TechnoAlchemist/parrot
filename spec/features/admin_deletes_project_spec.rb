@@ -18,7 +18,7 @@ feature "admin edits a project", %Q{
   scenario "admin deletes a project" do
     project = FactoryGirl.create(:project, cohort: cohort)    
     prev_count = Project.count
-    set_omniauth
+    set_omniauth(role: "admin")
     sign_in
     visit cohort_project_path(cohort, project)
     click_on 'Delete'

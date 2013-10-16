@@ -19,12 +19,12 @@ feature "admin views a project", %Q{
 
 
   scenario "views a project" do
-    # user = FactoryGirl.create(:user, cohort: cohort)
-    # sign_in_as(user)
+    set_omniauth(role: "admin")
+    sign_in
     project = FactoryGirl.create(:project, cohort: cohort)
 
     visit cohort_project_path(cohort, project)
-    # save_and_open_page
+  
     
     expect(page).to have_content(project.title)
     expect(page).to have_content(project.link)

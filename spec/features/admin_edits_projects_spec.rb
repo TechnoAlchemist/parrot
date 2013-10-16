@@ -46,7 +46,7 @@ feature "admin edits a project", %Q{
     project = FactoryGirl.create(:project, cohort: cohort)
     visit edit_cohort_project_path(cohort, project) 
 
-    expect(page).to have_content("You do not have permission to edit projects")
+    expect(page).to have_content("You must be signed in to continue")
   end
 
   scenario "student tries to edit a project" do
