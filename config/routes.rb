@@ -4,15 +4,21 @@ Parrot::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
-  resources :users do
-    
-  end
+  root 'pages#index'
+
+  resources :users
+
+  resources :sessions
+
+  get 'auth/github/callback', to: 'sessions#create'
+  get 'auth/failure', to: redirect('/users/new')
+  get 'signout', to: 'sessions#destroy', as: 'signout'
 
   resources :cohorts do
-    resources :projects, except: :new 
+    resources :projects
   end
 
-  resources :projects, only: :new
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
@@ -47,7 +53,7 @@ Parrot::Application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-  
+
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'

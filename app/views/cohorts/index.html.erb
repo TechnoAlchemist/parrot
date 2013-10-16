@@ -1,0 +1,10 @@
+<div>
+  <h1>Cohorts:</h1>
+  </div>
+<% if @cohorts.count > 0 %>
+  <% @cohorts.each do |cohort| %>
+    <%= link_to cohort.term, cohort_path(cohort) %><br>
+  <% end %>
+<% end %>
+
+<%= link_to "Create New Cohort", new_cohort_path %>

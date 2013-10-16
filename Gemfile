@@ -27,6 +27,10 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
+gem 'omniauth-github', :git => 'git://github.com/intridea/omniauth-github.git'
+
+gem 'simple_form'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
@@ -40,7 +44,13 @@ group :development, :test do
   gem 'valid_attribute'
   gem 'launchy'
   gem 'pry-rails'
-  gem 'database_cleaner'  
+  gem 'database_cleaner'
+  gem 'dotenv-rails'
+  gem 'coveralls', require: false
+end
+
+group :test do
+  gem 'rake' # required for Travis CI
 end
 
 # Use ActiveModel has_secure_password

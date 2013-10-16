@@ -1,0 +1,6 @@
+<%= simple_form_for [@cohort, @project] do |f| %>
+  <%= f.input :title %>
+  <%= f.input :link %>
+  <%= f.input :cohort, :label => "Cohort", :collection => Cohort.all, :label_method => :term, :include_blank => true %>
+  <%= f.submit "Create New Project" %>
+<% end %>
