@@ -1,11 +1,8 @@
 module TestHelpers
 
-  def sign_in_as(user)
+  def sign_in
     visit '/'
-    click_link 'Sign In'
-    fill_in "Login", with: user.email
-    fill_in "Password", with: user.password
-    click_button "Sign In"
+    click_link "Sign in with GitHub"
   end
 
 
